@@ -1,0 +1,27 @@
+# Utilisez l'image officielle PHP avec Apache
+FROM php:8.1-apache
+
+# Installez les dépendances nécessaires
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    locales apt-utils git libicu-dev g++ libpng-dev libxml2-dev libzip-dev libonig-dev libxslt-dev unzip \
+    libfreetype6-dev libjpeg62-turbo-dev libwebp-dev zlib1g-dev libmagickwand-dev ssl-cert
+
+# Installez le module SSL pour Apache
+RUN a2enmod ssl
+
+# Copiez vos certificats SSL dans le conteneur
+COPY certificat.crt /etc/ssl/certs/
+COPY cle_privee.key /etc/ssl/private/
+
+# Configurez Apache pour utiliser HTTPS
+RUN sed -i '/<VirtualHost \*:443>/a SSLEngine on' /etc/apache2/sites-available/default-ssl.conf
+RUN sed -i '/<VirtualHost \*:443>/a SSLCertificateFile /etc/ssl/certs/certificat.crt' /etc/apache2/sites-available/default-ssl.conf
+RUN sed -i '/<VirtualHost \*:443>/a SSLCertificateKeyFile /etc/ssl/private/cle_privee.key' /etc/apache2/sites-available/default-ssl.conf
+
+# Activez le site par défaut SSL
+RUN a2ensite default-ssl
+
+# Exposez le port 443 pour Apache (HTTPS)
+EXPOSE 443
+

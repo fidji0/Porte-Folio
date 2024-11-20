@@ -1,0 +1,10 @@
+php_value upload_max_filesize 256M
+RewriteEngine  on
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+

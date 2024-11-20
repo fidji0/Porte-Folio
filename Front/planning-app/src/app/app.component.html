@@ -1,0 +1,33 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom" class="padding" >
+      <ion-tab-button tab="accueil" >
+        <ion-icon name="calendar-outline"></ion-icon>
+        Ma Semaine
+      </ion-tab-button>
+      <ion-tab-button tab="team-planning">
+        <ion-icon name="people-outline"></ion-icon>
+        Mon équipe
+      </ion-tab-button>
+      <ion-tab-button tab="absence-request">
+        <ion-icon name="paper-plane-outline"></ion-icon>
+        Demandes
+      </ion-tab-button>
+      <ion-tab-button tab="historique">
+        <!-- Badge de notification avec le nombre de notifications non lues -->
+        <div class="notifications-icon-container" >
+          <ion-icon name="notifications-outline"></ion-icon>
+          <div *ngIf="schedule.unreadNotificationsCount > 0" class="badge">
+            {{ schedule.unreadNotificationsCount }}
+          </div>
+        </div>
+        Notif
+      </ion-tab-button>
+      <ion-tab-button tab="auth">
+        <ion-icon name="person-outline"></ion-icon>
+        Mes Infos
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-app>

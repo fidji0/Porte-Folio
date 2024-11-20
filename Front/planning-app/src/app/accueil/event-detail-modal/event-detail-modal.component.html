@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Détails de l'événement</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="event-header" [style.background-color]="getEventTypeColor(shift.type)">
+    <h1>{{ EVENT_TYPES[shift.type].name }}</h1>
+    <p>{{ shift.lieu }}</p>
+  </div>
+
+  <div class="event-details">
+    <div class="detail-item">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <div class="detail-content">
+        <h2>Date</h2>
+        <p>{{ shift.start_date | date:'dd MMMM yyyy' }}</p>
+      </div>
+    </div>
+
+    <div class="detail-item">
+      <ion-icon name="time-outline"></ion-icon>
+      <div class="detail-content">
+        <h2>Horaires</h2>
+        <p>{{ shift.start_date | date:'HH:mm' }} - {{ shift.end_date | date:'HH:mm' }}</p>
+      </div>
+    </div>
+
+    <div class="detail-item">
+      <ion-icon name="person-outline"></ion-icon>
+      <div class="detail-content">
+        <h2>Nom</h2>
+        <p>{{ shift.name | uppercase }}</p>
+      </div>
+    </div>
+    <div class="detail-item">
+      <ion-icon name="person-outline"></ion-icon>
+      <div class="detail-content">
+        <h2>Prénoms</h2>
+        <p>{{ shift.surname | uppercase }}</p>
+      </div>
+    </div>
+
+    <div class="detail-item" *ngIf="shift.objet && shift.employe_id == auth.user.id">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <div class="detail-content">
+        <h2>Objet</h2>
+        <p>{{ shift.objet }}</p>
+      </div>
+    </div>
+
+    <div class="detail-item" *ngIf="shift.detail && shift.detail !== 'null'">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <div class="detail-content">
+        <h2>Description</h2>
+        <p>{{ shift.detail }}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

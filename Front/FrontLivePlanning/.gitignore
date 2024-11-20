@@ -1,0 +1,13 @@
+/vendor
+/public/css
+/public/img
+
+/public/scss
+/public/vendor
+/src ancien
+constanteDefined.php
+env.php
+/jwt
+/error
+/public/video
+/public/js

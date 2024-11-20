@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="week-header">
+      <ion-button fill="clear" (click)="moisPrecedent()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <h1>{{ moisCourant$ | async }}</h1>
+      <ion-button fill="clear" (click)="moisSuivant()">
+        <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="timeline-container" #timelineContainer>
+    <div class="timeline">
+      <div *ngFor="let jour of joursduMois$ | async" class="day-item"
+        [class.selected]="(dateSelectionnee$ | async | date) === (jour.date | date)" [class.today]="jour.estAujourdhui"
+        (click)="selectionnerDate(jour.date)">
+        <div class="day-name">{{ jour.nomJour }}</div>
+        <div class="day-number">{{ jour.numeroJour }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let groupe of quartsFiltres$ | async" class="person-group">
+    <h2 class="person-name">{{ groupe.personne }}</h2>
+    <div *ngFor="let quart of groupe.quarts" class="shift-item" [style.border-left-color]="quart.color"
+      (click)="ouvrirDetailEvenement(quart)">
+      <div class="shift-header">
+        <div class="shift-time">{{ formaterHeure(quart.start_date) }} - {{ formaterHeure(quart.end_date) }}</div>
+      </div>
+      <div class="shift-details">
+        <ion-badge [style.background-color]="obtenirCouleurTypeEvenement(quart.type)">{{
+          TYPES_EVENEMENTS[quart.type].nom }}</ion-badge>
+        <ion-badge *ngIf="quart.objet && quart.employe_id == auth.user.id" color="light">{{ quart.objet }}</ion-badge>
+      </div>
+    </div>
+  </div>
+</ion-content>

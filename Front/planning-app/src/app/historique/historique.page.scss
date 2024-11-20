@@ -1,0 +1,61 @@
+:host {
+    --color-orange: #FF6000;
+    --color-gray: #454545;
+    --color-beige: #FFE6C7;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  
+    h1 {
+        font-size: 20px;
+        color: var(--ion-color-dark);
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+  }
+  
+  .notifications-list {
+    padding: 20px;
+  
+    .notification-item {
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--color-orange);
+  
+      .notification-details {
+        flex-grow: 1;
+        padding: 0 15px;
+  
+        h3 {
+          margin: 0 0 5px 0;
+          font-size: 16px;
+        }
+  
+        p {
+          margin: 0;
+          font-size: 14px;
+          color: var(--color-gray);
+        }
+      }
+  
+      .notification-date {
+        font-size: 12px;
+        color: var(--color-gray);
+        min-width: 100px;
+        text-align: right;
+      }
+    }
+  }
+  

@@ -1,0 +1,45 @@
+<!-- src/app/components/schedule/schedule.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <div class="week-header">
+      <ion-button fill="clear" (click)="previousWeek()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <h1>{{ weekLabel$ | async }}</h1>
+      <ion-button fill="clear" (click)="nextWeek()">
+        <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="schedule-content">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ng-container *ngIf="filteredSchedule$ | async as groupedSchedule">
+      <div class="schedule-list">
+        <div *ngFor="let group of groupedSchedule" class="day-group">
+          <h2 class="date-header">
+            {{ group.date | uppercase }}
+          </h2>
+          <div *ngFor="let shift of group.shifts" class="shift-item"
+            [ngStyle]="{'border-left-color': getEventTypeColor(shift.type)}" (click)="openEventDetail(shift)">
+            <div class="shift-time">
+              {{ shift.start_date | date:'HH:mm' }} - {{ shift.end_date | date:'HH:mm' }}
+            </div>
+            <div class="shift-details">
+              <h4>{{ EVENT_TYPES[shift.type].name  }}</h4>
+              <p>{{ shift.objet}}</p>
+              <p>{{ shift.lieu ?? null}}</p>
+            </div>
+            <div class="shift-duration">
+              {{ calculateDuration(shift.start_date, shift.end_date) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
+  </ion-content>

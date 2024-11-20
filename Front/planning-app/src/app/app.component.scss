@@ -1,0 +1,41 @@
+/* Dans votre fichier CSS global ou le fichier de style de la page */
+ion-tab-button {
+    --background: var(--ion-background-color, #faf8ed00); /* Remplacez #votreCouleur par la couleur de fond souhaitée */
+    
+    }
+ 
+    
+  .padding{
+    padding: 8px 0px;
+    padding-bottom: 15px;
+  }
+  .notifications-icon-container {
+    overflow: visible !important;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ion-icon {
+      font-size: 30px;
+    }
+  
+    .badge {
+      overflow: visible !important;
+      z-index: 10000;
+      position: absolute;
+      top: 0px;
+      right: -5px;
+      background-color: var(--color-badge-bg, #FF3B30); /* Utilisation de variable CSS pour la couleur du badge */
+      color: var(--color-badge-text, #FFFFFF);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+      font-weight: bold;
+      
+    }
+  }
+  

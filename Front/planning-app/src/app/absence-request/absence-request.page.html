@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <h1 class="title">Effectuer une demande</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="content-container">
+    <form [formGroup]="absenceForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Date de début *</label>
+        <ion-input type="datetime-local" lang="fr" formControlName="start_date"></ion-input>
+      </div>
+
+      <div class="form-group">
+        <label>Date de fin *</label>
+        <ion-input type="datetime-local" lang="fr" formControlName="end_date"></ion-input>
+      </div>
+
+      <div class="form-group">
+        <label>Type de demande *</label>
+        <ion-select formControlName="objet" interface="popover" placeholder="Selectione type d'évènement">
+          <ion-select-option *ngFor="let type of absenceTypes" [value]="type">{{type}}</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="form-group">
+        <label>Commentaire *</label>
+        <ion-textarea formControlName="details" placeholder="Informations supplémentaires"></ion-textarea>
+      </div>
+
+      <ion-button expand="block" type="submit" [disabled]="!absenceForm.valid">Soumettre la demande</ion-button>
+    </form>
+
+  </div>
+  <ion-segment [(ngModel)]="segmentModel" style="height: 50px;" class="custom-segment">
+
+    <ion-segment-button value="en attente">
+      <ion-label>En Attente</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="valide">
+      <ion-label>Validées</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="refuse">
+      <ion-label>Refusées</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="absences-list">
+    <h2>Mes demandes</h2>
+
+    <!-- Affiche les absences en fonction du segment sélectionné -->
+    <ng-container>
+      <div class="absence-group" *ngIf="absencesGroupees[segmentModel]?.length > 0">
+        <div class="absence-item" *ngFor="let absence of absencesGroupees[segmentModel].slice().reverse()">
+          <div *ngIf="segmentModel == 'en attente'">
+            <h3>{{absence.objet}} <ion-icon color="danger" style="font-size: 2rem;" class="ion-float-right" name="close-circle-outline" (click)="confirmDelete(absence.id)" ></ion-icon></h3>
+            <p>Du {{formatDate(absence.start_date)}} au {{formatDate(absence.end_date)}}</p>
+            
+          </div>
+          <div *ngIf="segmentModel != 'en attente'">
+            <h3>{{absence.objet}}</h3>
+            <p>Du {{formatDate(absence.start_date)}} au {{formatDate(absence.end_date)}}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Message quand il n'y a pas d'absences -->
+    <p class="no-absences" *ngIf="absencesGroupees[segmentModel]?.length === 0">
+      Aucune demande d'absence pour le moment.
+    </p>
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "Live Planning",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="chevron-back-outline" size="large" routerLink="/auth"></ion-icon>
+    </ion-buttons>
+    <h1>Entreprise</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+
+    <ion-item>
+      <ion-label class="ion-text-center">
+        <h2>{{ auth.user.boutiqueName | uppercase}} </h2>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="call-outline" slot="start"></ion-icon>
+      <ion-label>Téléphone</ion-label>
+      <ion-note slot="end">{{ auth.user.enterprisePhone }}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="time-outline" slot="start"></ion-icon>
+      <ion-label>Adresse</ion-label>
+      <ion-note slot="end">{{ auth.user.adress }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="time-outline" slot="start"></ion-icon>
+      <ion-label>Code Postal</ion-label>
+      <ion-note slot="end">{{ auth.user.zipCode }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="time-outline" slot="start"></ion-icon>
+      <ion-label>Ville</ion-label>
+      <ion-note slot="end">{{ auth.user.city }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-label>Code entreprise</ion-label>
+      <ion-note slot="end">{{ auth.user.ste_code }}</ion-note>
+    </ion-item>
+    
+    
+    <!-- Vous pouvez ajouter d'autres informations ici -->
+
+  </ion-list>
+
+</ion-content>

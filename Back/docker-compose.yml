@@ -1,0 +1,106 @@
+version: '3'
+
+services:
+  # Service PHP avec Apache
+  send-email:
+    image: phpmvmb 
+    ports:
+      - "8080:80"
+    volumes:
+      - ./back/SendEmailMVMB/:/var/www/
+      - ./back/SendEmailMVMB/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  
+  
+  back-api-boutique:
+    image: phpmvmb 
+    ports:
+      - "8010:80"
+    volumes:
+      - ./back/backApiBoutiqueMVMB/:/var/www/
+      - ./back/backApiBoutiqueMVMB/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+
+
+  auth-user-app:
+    image: phpmvmb 
+    ports:
+      - "8020:80"
+    volumes:
+      - ./back/AuthUserApp/:/var/www/
+      - ./back/AuthUserApp/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+
+  auth-mvmb:
+    image: phpmvmb 
+    ports:
+      - "8030:80"
+    volumes:
+      - ./back/AuthMVMB/:/var/www/
+      - ./back/AuthMVMB/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  api-promo:
+    image: phpmvmb 
+    ports:
+      - "8040:80"
+    volumes:
+      - ./back/ApiPromo/:/var/www/
+      - ./back/ApiPromo/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  
+  front-mvmb:
+    image: phpmvmb 
+    ports:
+      - "8060:80"
+    volumes:
+      - ./front/Front-MVMB/:/var/www/
+      - ./front/Front-MVMB/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  back-office-mvmb:
+    image: phpmvmb 
+    ports:
+      - "8090:80"
+    volumes:
+      - ./front/Back_office-Gestion/:/var/www/
+      - ./front/Back_office-Gestion/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  test-fb:
+    image: phpmvmb 
+    ports:
+      - "8200:80"
+    volumes:
+      - ./back/TestApiFb/:/var/www/
+      - ./back/TestApiFb/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+
+  front-back-office:
+    image: phpmvmb 
+    ports:
+      - "8070:80"
+    volumes:
+      - ./front/FrontBackOfficePhp/:/var/www/
+      - ./front/FrontBackOfficePhp/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+  
+    networks:
+      - app-network
+
+  
+networks:
+  app-network:
+    driver: bridge

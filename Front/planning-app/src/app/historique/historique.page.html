@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="header">
+      <h1>Historique des Notifications</h1>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="notifications-content">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="notifications-list">
+    <div *ngFor="let notif of notifications.slice().reverse()" class="notification-item">
+      <div class="notification-details">
+        <h3>{{ notif.title }}</h3>
+        <p>{{ notif.message }}</p>
+      </div>
+      <div class="notification-date">
+        <!-- Si vous avez une propriété de date dans votre classe Notif -->
+        {{ notif?.created_at | date:'dd/MM/yyyy HH:mm' }}
+      </div>
+    </div>
+  </div>
+</ion-content>

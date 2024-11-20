@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "quill-delta-to-html": "^0.12.1"
+  }
+}

@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  # Service PHP avec Apache
+  absence:
+    image: phpmvmb 
+    ports:
+      - "9000:80"
+    volumes:
+      - ./back/Absence/:/var/www/
+      - ./back/Absence/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  
+  
+  auth:
+    image: phpmvmb 
+    ports:
+      - "9010:80"
+    volumes:
+      - ./back/auth/:/var/www/
+      - ./back/auth/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+
+  taskskill:
+    image: phpmvmb 
+    ports:
+      - "9090:80"
+    volumes:
+      - ./back/TaskSkill/:/var/www/
+      - ./back/TaskSkill/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+
+
+  employe:
+    image: phpmvmb 
+    ports:
+      - "9020:80"
+    volumes:
+      - ./back/Employe/:/var/www/
+      - ./back/Employe/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+
+  event:
+    image: phpmvmb 
+    ports:
+      - "9030:80"
+    volumes:
+      - ./back/Event/:/var/www/
+      - ./back/Event/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  
+  frontOffice:
+    image: phpmvmb 
+    ports:
+      - "9060:80"
+    volumes:
+      - ./front/FrontLivePlanning/:/var/www/
+      - ./front/FrontLivePlanning/vhosts/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      
+    networks:
+      - app-network
+  
+  
+networks:
+  app-network:
+    driver: bridge

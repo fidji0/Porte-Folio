@@ -1,0 +1,28 @@
+{
+    "name": "anthonyvincent/planing_absence",
+    "description": "api gestion des absence",
+    "type": "project",
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "phpmailer/phpmailer": "^6.9",
+        "kreait/firebase-php": "^7.13",
+        "firebase/php-jwt": "^6.10"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.3"
+    },
+    "license": "commercial",
+    "autoload": {
+        "psr-4": {
+            "Anthonyvincent\\PlanningApi\\": "src/",
+            "App\\Controller\\" : "src/controllers",
+            "App\\Class\\" : "src/models"
+        }
+    },
+    "authors": [
+        {
+            "name": "Anthony VINCENT",
+            "email": "a.vincent.anthony@gmail.com"
+        }
+    ]
+}
